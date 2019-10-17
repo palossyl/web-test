@@ -1,30 +1,30 @@
 pipeline {
-
     agent any
+    
     tools {
         maven 'apache-maven-3.6.2' 
+        jdk 'jdk1.8.0_181' 
     }
+    
     stages {
         stage('Compile stage') {
             steps {
                 bat "mvn clean compile" 
-        }
-    }
+        	}
+    	}
 
-         stage('testing stage') {
+        stage('testing stage') {
              steps {
                 bat "mvn test"
-        }
-    }
+        	}
+    	}
 
-          stage('installation stage') {
-              steps {
+        stage('installation stage') {
+            steps {
                 bat "mvn install"
-        }
-    }
-
-  }
-
+        	}
+    	}
+  	}
 }
 
 
