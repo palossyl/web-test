@@ -1,10 +1,25 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
+    agent any
     stages {
-        stage('build') {
+        stage('Compile Stage') {
             steps {
-                sh 'echo "Hello World"'
-                sh 'mvn clean install'
+                withMaven(maven: 'apache-maven-3.6.2') { 
+                   sh 'mvn clean compile'
+                }
+            }
+        }
+        stage('Testing Stage') {
+            steps {
+                withMaven(maven: 'apache-maven-3.6.2') { 
+                   sh 'mvn test'
+                }
+            }
+        }
+        stage('Install Stage') {
+            steps {
+                withMaven(maven: 'apache-maven-3.6.2') { 
+                   sh 'mvn install'
+                }
             }
         }
     }
